@@ -1,0 +1,5 @@
+package com.springboot.employeeservice.service;
+
+public interface EmployeeService {
+
+}

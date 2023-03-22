@@ -1,0 +1,5 @@
+package com.springboot.departmentservice.controller;
+
+public class MessageController {
+
+}

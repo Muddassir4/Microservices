@@ -1,0 +1,14 @@
+package com.springboot.employeeservice.service.impl;
+
+import com.springboot.employeeservice.dto.EmployeeDto;
+import com.springboot.employeeservice.service.EmployeeService;
+
+public class EmployeeServiceImpl implements EmployeeService {
+
+	@Override
+	public EmployeeDto saveEmployee(EmployeeDto dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

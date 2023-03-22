@@ -1,0 +1,5 @@
+package com.springboot.employeeservice.dto;
+
+public class APIResponseDto {
+
+}
