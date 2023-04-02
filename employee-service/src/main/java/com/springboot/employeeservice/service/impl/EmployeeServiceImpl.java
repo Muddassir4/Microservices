@@ -3,10 +3,12 @@ package com.springboot.employeeservice.service.impl;
 import org.springframework.beans.BeanUtils;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.springboot.employeeservice.dto.APIResponseDto;
 import com.springboot.employeeservice.dto.DepartmentDto;
 import com.springboot.employeeservice.dto.EmployeeDto;
+import com.springboot.employeeservice.dto.OrganizationDto;
 import com.springboot.employeeservice.entity.Employee;
 import com.springboot.employeeservice.repository.EmployeeRepository;
 import com.springboot.employeeservice.service.APIClient;
@@ -20,6 +22,8 @@ import lombok.AllArgsConstructor;
 public class EmployeeServiceImpl implements EmployeeService {
 
 	private EmployeeRepository employeeRepository;
+	
+	private WebClient webClient;
 	
 	private APIClient apiClient;
 
@@ -44,12 +48,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	DepartmentDto departmentDto = apiClient.getDepartment(employee.getDepartmentCode());
 	
+	OrganizationDto organizationDto = webClient.get()
+			.uri("http://localhost:8083/api/organizations/"+employee.getOrganizationCode())
+			.retrieve()
+			.bodyToMono(OrganizationDto.class)
+			.block();
+	
 	EmployeeDto employeeDto = new EmployeeDto();
 	BeanUtils.copyProperties(employee, employeeDto);
 	
 	APIResponseDto apiResponseDto = new APIResponseDto();
 	apiResponseDto.setEmployeeDto(employeeDto);
 	apiResponseDto.setDepartmentDto(departmentDto);
+	apiResponseDto.setOrganizationDto(organizationDto);
 	
 	return apiResponseDto;
 	}

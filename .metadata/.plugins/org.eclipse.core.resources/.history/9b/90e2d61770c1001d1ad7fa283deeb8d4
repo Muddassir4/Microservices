@@ -1,5 +1,0 @@
-package com.springboot.employeeservice.dto;
-
-public class EmployeeDto {
-
-}
